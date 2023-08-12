@@ -1,0 +1,12 @@
+.dashboard {
+    width: 280px;
+    height: calc(100vh - 57px);
+    position: fixed;  
+    margin-top: 57px;
+  }
+  .dashboard-link{
+      margin-bottom: 3px;
+  }
+  .dashboard-link:hover{
+      background-color: #434343;
+  }

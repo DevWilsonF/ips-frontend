@@ -9,21 +9,25 @@ import Navbar from './components/Navbar'
 function App() {
   return (
     <>
-    
-    
+
+
       <Router>
-        <Navbar/>
+        <Navbar />
         <Routes>
-          <Route path='/' element={<HomePage/>} />
-          <Route path='/login' element={<LoginPage/>} />
-          <Route path='/dashboard' element={<DashboardPage/>} />
-          <Route path='*' element={<NotFoundPage/>} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/dashboard/*' element={<DashboardPage />}>
+            <Route path='home' />
+            <Route path='patients/*' />
+            <Route path='profile' />
+          </Route>
+          <Route path='*' element={<NotFoundPage />} />
 
         </Routes>
 
 
       </Router>
-      
+
     </>
   )
 }
