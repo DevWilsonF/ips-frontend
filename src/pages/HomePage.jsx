@@ -17,7 +17,7 @@ function HomePage() {
             <Link to={'/login'} className="btn btn-outline-primary" >Login</Link>
           </div>
           <div className="col-sm-12 col-md-6 d-flex justify-content-center align-items-center">
-            <img className="img-fluid" draggable={false} src="/public/ips_logo.ico" alt="ips-logo" />
+            <img className="img-fluid" draggable={false} src="/ips_logo.ico" alt="ips-logo" />
           </div>
         </div>
       </div>

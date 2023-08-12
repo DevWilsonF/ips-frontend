@@ -5,7 +5,7 @@ function Navbar() {
     
       <nav className="navbar navbar-expand-lg border-bottom border-bottom-dark shadow fixed-top z-3" style={{backgroundColor:'#fff'}}>
         <div className="container-fluid">
-          <NavLink className="navbar-brand" to={'/'}> <img src="/public/ips_logo.ico" alt="Prevenir-logo" width={30} height={24} /> </NavLink>
+          <NavLink className="navbar-brand" to={'/'}> <img src="/ips_logo.ico" alt="Prevenir-logo" width={30} height={24} /> </NavLink>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
