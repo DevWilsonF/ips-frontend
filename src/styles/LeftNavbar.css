@@ -10,3 +10,15 @@
   .dashboard-link:hover{
       background-color: #434343;
   }
+  @media (max-width: 767px) {
+    .navbar {
+      padding: 10px 10px;
+    }
+  }
+  @media (max-width: 575px) {
+      .dashboard{
+          width: 70px;
+      }
+      
+  }
+  
