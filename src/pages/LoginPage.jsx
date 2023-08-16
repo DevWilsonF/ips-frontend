@@ -1,7 +1,12 @@
 import React from 'react'
 import '../styles/LoginPage.css'
-function LoginPage() {
+import { Navigate } from 'react-router-dom'
+function LoginPage({isLogued}) {
   document.title = 'Prevenir IPS | Login'
+  if(isLogued){
+    return <Navigate to={'/dashboard/home'}/>
+
+  }
   return (
     <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: 'calc(100vh - 60px)', paddingTop:'60px' }}>
       <div className="d-flex flex-column justify-content-center shadow rounded p-3 border login">

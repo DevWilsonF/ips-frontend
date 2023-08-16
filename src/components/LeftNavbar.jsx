@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
-import { BsHouseFill, BsPersonRolodex, BsPersonCircle, BsSpeedometer, BsGearFill } from "react-icons/bs";
-import { FaWheelchair, FaUserMd, FaFileMedicalAlt, FaFolderOpen, FaFileMedical } from "react-icons/fa";
-
+import { BsHouseFill, BsPersonRolodex, BsPersonCircle, BsSpeedometer, BsGearFill, BsHospitalFill } from "react-icons/bs";
+import { FaWheelchair, FaUserMd, FaFileMedicalAlt, FaFolderOpen, FaFileMedical, FaNotesMedical, FaPaperclip } from "react-icons/fa";
+import '../styles/LeftNavbar.css'
 
 
 function LeftNavbar() {
@@ -20,9 +20,9 @@ function LeftNavbar() {
                     <NavLink to={'patients'} className="nav-link text-white dashboard-link"><FaWheelchair/> <span className="d-none d-sm-inline">Pacientes</span></NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink to={'employees'} className="nav-link text-white dashboard-link"><FaUserMd/> <span className="d-none d-sm-inline">Empleados</span></NavLink>
-
+                    <NavLink to={'appointment'} className="nav-link text-white dashboard-link"><FaPaperclip/> <span className="d-none d-sm-inline">Citas</span></NavLink>
                 </li>
+                
 
                 <li className="nav-item">
                     <NavLink to={'consultations'} className="nav-link text-white dashboard-link"> <FaFileMedical/> <span className="d-none d-sm-inline">Consultas</span></NavLink>
@@ -34,6 +34,14 @@ function LeftNavbar() {
                 </li>
                 <li className="nav-item">
                     <NavLink to={'medical-histories'} className="nav-link text-white dashboard-link"><FaFolderOpen/> <span className="d-none d-sm-inline">Historias Medicas</span></NavLink>
+
+                </li>
+                <li className="nav-item">
+                    <NavLink to={'employees'} className="nav-link text-white dashboard-link"><FaUserMd/> <span className="d-none d-sm-inline">Empleados</span></NavLink>
+
+                </li>
+                <li className="nav-item">
+                    <NavLink to={'employee-type'} className="nav-link text-white dashboard-link"><BsHospitalFill/> <span className="d-none d-sm-inline">Empleos</span></NavLink>
 
                 </li>
                 
