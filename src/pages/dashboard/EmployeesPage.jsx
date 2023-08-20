@@ -1,8 +1,20 @@
 import React from 'react'
+import DashboardSection from '../../components/DashboardSection'
+import FilterData from '../../components/FilterData'
 
 function EmployeesPage() {
   return (
-    <div>EmployeesPage</div>
+    <>
+    <DashboardSection title={'Total Empleados'}>
+      <p>50</p>
+
+    </DashboardSection>
+    <DashboardSection title={'Empleos'}></DashboardSection>
+    <DashboardSection title={'Empleados'}>
+      <FilterData></FilterData>
+
+    </DashboardSection>
+    </>
   )
 }
 

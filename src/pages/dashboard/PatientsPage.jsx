@@ -5,7 +5,8 @@ import FilterData from '../../components/FilterData'
 function PatientsPage() {
   return (
     <DashboardSection title={'Pacientes'}>
-      <FilterData/>
+      <FilterData><button className='col-2 btn btn-success'>Agregar Paciente</button></FilterData>
+      
       
       <table className='table table-stripped'>
         <thead>
