@@ -8,8 +8,8 @@ function LoginPage({isLogued}) {
 
   }
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: 'calc(100vh - 60px)', paddingTop:'60px' }}>
-      <div className="d-flex flex-column justify-content-center shadow rounded p-3 border login">
+    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: 'calc(100vh - 70px)'}}>
+      <div className="d-flex flex-column justify-content-center shadow-lg rounded-4 p-3 login">
         <h1>Login</h1>
         <form action="">
           <label className='form-label' htmlFor="name">Nombre:</label>

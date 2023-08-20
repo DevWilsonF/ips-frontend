@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 function Navbar({isLogued}) {
   return (
     
-      <nav className="navbar navbar-expand-lg border-bottom border-bottom-dark shadow-sm fixed-top z-3" style={{backgroundColor:'#fff'}}>
+      <nav className="navbar navbar-expand-lg border-bottom border-bottom-dark shadow-sm sticky-top z-3" style={{backgroundColor:'#fff'}}>
         <div className="container-fluid">
           <NavLink className="navbar-brand" to={'/'}> <img src="/ips_logo.ico" alt="Prevenir-logo" width={30} height={24} /> </NavLink>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">

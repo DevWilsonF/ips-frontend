@@ -20,7 +20,7 @@ function LeftNavbar() {
                     <NavLink to={'patients'} className="nav-link text-white dashboard-link"><FaWheelchair/> <span className="d-none d-sm-inline">Pacientes</span></NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink to={'appointment'} className="nav-link text-white dashboard-link"><FaPaperclip/> <span className="d-none d-sm-inline">Citas</span></NavLink>
+                    <NavLink to={'appointments'} className="nav-link text-white dashboard-link"><FaPaperclip/> <span className="d-none d-sm-inline">Citas</span></NavLink>
                 </li>
                 
 
@@ -41,7 +41,7 @@ function LeftNavbar() {
 
                 </li>
                 <li className="nav-item">
-                    <NavLink to={'employee-type'} className="nav-link text-white dashboard-link"><BsHospitalFill/> <span className="d-none d-sm-inline">Empleos</span></NavLink>
+                    <NavLink to={'employee-types'} className="nav-link text-white dashboard-link"><BsHospitalFill/> <span className="d-none d-sm-inline">Empleos</span></NavLink>
 
                 </li>
                 
