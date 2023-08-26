@@ -4,9 +4,8 @@ import FilterData from '../../components/FilterData'
 
 function ExamsPage() {
   return (
-    <DashboardSection title={'Examenes'}>
-            <FilterData><button className='col-2 btn btn-success'>Agregar Examen</button></FilterData>
-
+    <DashboardSection title={'Examenes'} header={<button className='btn btn-success'>Agregar Examen</button>}>
+      <FilterData filters={[{text:'ID',type:'number'},{text:'Tipo',type:'text'},{text:'Paciente',type:'text'},{text:'Fecha',type:'date'}]}/>
 
       <table className='table table-stripped'>
         <thead>

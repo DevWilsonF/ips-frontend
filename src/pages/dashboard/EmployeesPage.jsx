@@ -9,9 +9,9 @@ function EmployeesPage() {
       <p>50</p>
 
     </DashboardSection>
-    <DashboardSection title={'Empleos'}></DashboardSection>
-    <DashboardSection title={'Empleados'}>
-      <FilterData></FilterData>
+    
+    <DashboardSection title={'Empleados'} header={<button className='btn btn-success'>Agregar Empleado</button>}>
+      <FilterData filters={[{text:'ID',type:'number'},{text:'Nombre',type:'text'}]}/>
 
     </DashboardSection>
     </>

@@ -1,13 +1,11 @@
 .content {
-    
-    margin-left: 280px;
-    background-color: #e2ecf7f2;
-    
-    min-height: calc(100vh - 60px)
+  margin-left: 280px;
+  background-color: #e2ecf7f2;
+
+  min-height: calc(100vh - 60px);
+}
+@media (max-width: 575px) {
+  .content {
+    margin-left: 70px;
   }
-  @media (max-width: 575px) {
-    
-    .content{
-        margin-left: 70px;
-    }
 }

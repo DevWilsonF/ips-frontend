@@ -4,10 +4,9 @@ import FilterData from '../../components/FilterData'
 
 function AppointmentsPage() {
     return (
-    
-        <DashboardSection title={'Citas'}>
-      <FilterData><button className='col-2 btn btn-success'>Agregar Cita</button></FilterData>
 
+        <DashboardSection title={'Citas'}header={<button className='btn btn-success'>Agendar Cita</button>}>
+            <FilterData filters={[{ text: 'ID', type: 'number' },{text:'Doctor',type:'text'},{text:'Paciente',type:'text'},{text:'Fecha',type:'date'},{text:'Hora',type:'time'}]} />
             <table className='table table-stripped'>
                 <thead>
                     <tr>
@@ -36,7 +35,7 @@ function AppointmentsPage() {
             </table>
 
         </DashboardSection>
-    
+
     )
 }
 

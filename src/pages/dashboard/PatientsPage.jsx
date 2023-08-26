@@ -4,11 +4,10 @@ import FilterData from '../../components/FilterData'
 
 function PatientsPage() {
   return (
-    <DashboardSection title={'Pacientes'}>
-      <FilterData><button className='col-2 btn btn-success'>Agregar Paciente</button></FilterData>
-      
-      
-      <table className='table table-stripped'>
+    <DashboardSection title={'Pacientes'} header={<button className='btn btn-success'>Agregar Paciente</button>}>
+      <FilterData filters={[{ text: 'ID', type: 'number' }, { text: 'Nombre', type: 'text' }, { text: 'Apellido', type: 'text' }, { text: 'Registrado', type: 'date' }, { text: 'DNI', type: 'number' }, { text: 'Celular', type: 'number' }, { text: 'Email', type: 'email' }]} />
+
+      <div className="table-responsive"><table className='table table-stripped'>
         <thead>
           <tr>
             <th>ID</th>
@@ -34,7 +33,8 @@ function PatientsPage() {
             <td><button className='btn btn-primary'>Ver</button></td>
           </tr>
         </tbody>
-      </table>
+      </table></div>
+
 
     </DashboardSection>
   )

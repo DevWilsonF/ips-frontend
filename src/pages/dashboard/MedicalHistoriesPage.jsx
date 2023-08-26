@@ -6,7 +6,7 @@ function MedicalHistoriesPage() {
   return (
     <>
       <DashboardSection title={'Historias Medicas'}>
-        <FilterData />
+        <FilterData filters={[{text:'ID',type:'number'},{text:'Paciente',type:'text'}]}/>
 
         <table className='table table-stripped'>
           <thead>
