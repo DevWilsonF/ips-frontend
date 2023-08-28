@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/DashboardSection.css'
+import '../../styles/DashboardSection.css'
 function DashboardSection({ title, header, children }) {
   return (
     <div className='container-fluid mb-3 p-4 rounded-3 dashboard-section'>

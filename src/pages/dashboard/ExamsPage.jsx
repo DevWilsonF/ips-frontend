@@ -1,39 +1,49 @@
-import React from 'react'
-import DashboardSection from '../../components/DashboardSection'
-import FilterData from '../../components/FilterData'
+import React, { useEffect, useState } from 'react'
+import DashboardSection from '../../components/dashboard/DashboardSection'
+import FilterData from '../../components/dashboard/FilterData'
+import DataTable from '../../components/dashboard/DataTable'
+import { getExams } from '../../api/Exams'
+import Loading from '../../components/Loading'
 
 function ExamsPage() {
+  const [examsData, setExamsData] = useState([])
+  const [loading, setloading] = useState(true)
+  const [filterData, setFilterData] = useState([])
+  const [filtering, setFiltering] = useState(false)
+  const filter = ({ text, filterValue }) => {
+    if (text == '') {
+      setFiltering(false)
+    } else {
+      setFiltering(true)
+    }
+    setFilterData(examsData.filter((obj) => obj[filterValue].toString().toLowerCase().includes(text.toLowerCase())))
+
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await getExams()
+      let newData = data.map(({ medicalExamsID, examType, PatientID, medicalExamsDate }) => ({ medicalExamsID, examType, PatientID, medicalExamsDate }))
+      setExamsData(newData)
+      setloading(false)
+
+
+    }
+    fetchData()
+
+
+
+
+  }, [])
   return (
+
     <DashboardSection title={'Examenes'} header={<button className='btn btn-success'>Agregar Examen</button>}>
-      <FilterData filters={[{text:'ID',type:'number'},{text:'Tipo',type:'text'},{text:'Paciente',type:'text'},{text:'Fecha',type:'date'}]}/>
+      <FilterData onFilter={filter} filters={[{ text: 'ID', type: 'number',value:'medicalExamsID' }, { text: 'Tipo', type: 'text' ,value:'examType'}, { text: 'Paciente', type: 'text' ,value:'PatientID_id'}, { text: 'Fecha', type: 'date' ,value:'medicalExamsDate'}]} />
 
-      <table className='table table-stripped'>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tipo</th>
-            <th>Paciente</th>
-            <th>Fecha</th>
+      <Loading loading={loading}>
 
+        <DataTable titles={['ID', 'Tipo', 'Paciente', 'Fecha']} filtering={filtering} filterData={filterData} data={examsData} actions={(id) => { return <button onClick={() => alert(id)} className='btn btn-primary'>Ver</button> }} />
+      </Loading>
 
-            <th>Acciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td>01</td>
-            <td>Diagnosis</td>
-
-            <td>Felipe Andrade</td>
-            <td>19/08/2023</td>
-
-
-
-            <td><button className='btn btn-primary'>Ver</button></td>
-          </tr>
-        </tbody>
-      </table>
 
     </DashboardSection>
   )

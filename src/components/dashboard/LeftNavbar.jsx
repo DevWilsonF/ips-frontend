@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import { BsHouseFill, BsPersonRolodex, BsPersonCircle, BsSpeedometer, BsGearFill, BsHospitalFill } from "react-icons/bs";
 import { FaWheelchair, FaUserMd, FaFileMedicalAlt, FaFolderOpen, FaFileMedical, FaNotesMedical, FaPaperclip } from "react-icons/fa";
-import '../styles/LeftNavbar.css'
+import '../../styles/LeftNavbar.css'
 
 
 function LeftNavbar() {

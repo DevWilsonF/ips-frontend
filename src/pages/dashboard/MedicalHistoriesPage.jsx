@@ -1,33 +1,49 @@
-import React from 'react'
-import DashboardSection from '../../components/DashboardSection'
-import FilterData from '../../components/FilterData'
+import { useEffect, useState } from 'react'
+import DashboardSection from '../../components/dashboard/DashboardSection'
+import FilterData from '../../components/dashboard/FilterData'
+import DataTable from '../../components/dashboard/DataTable'
+import { getMedicalHistories } from '../../api/MedicalHistories'
+import Loading from '../../components/Loading'
 
 function MedicalHistoriesPage() {
+  const [medicalHistoryData, setMedicalHistoryData] = useState([])
+  const [loading, setloading] = useState(true)
+  const [filterData, setFilterData] = useState([])
+  const [filtering, setFiltering] = useState(false)
+  const filter = ({ text, filterValue }) => {
+    if (text == '') {
+      setFiltering(false)
+    } else {
+      setFiltering(true)
+    }
+    setFilterData(medicalHistoryData.filter((obj) => obj[filterValue].toString().toLowerCase().includes(text.toLowerCase())))
+
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      let data = await getMedicalHistories()
+      let newData = data.map(({ historyID, patientID }) => ({ historyID, patientID }))
+      setMedicalHistoryData(newData)
+      setloading(false)
+
+
+    }
+    fetchData()
+
+
+
+
+  }, [])
   return (
     <>
       <DashboardSection title={'Historias Medicas'}>
-        <FilterData filters={[{text:'ID',type:'number'},{text:'Paciente',type:'text'}]}/>
+        <FilterData onFilter={filter} filters={[{ text: 'ID', type: 'number', value: 'historyID' }, { text: 'Paciente', type: 'text', value: 'patientID' }]} />
 
-        <table className='table table-stripped'>
-          <thead>
-            <tr>
-              <th>ID</th>
+        <Loading loading={loading}>
+          <DataTable titles={['ID', 'Paciente',]} filtering={filtering} filterData={filterData} data={medicalHistoryData} actions={(id) => { return <button onClick={() => alert(id)} className='btn btn-primary'>Ver</button> }} />
 
-              <th>Paciente</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
+        </Loading>
 
-          <tbody>
-            <tr>
-              <td>01</td>
-
-              <td>Felipe Andrade</td>
-
-              <td><button className='btn btn-primary'>Ver</button></td>
-            </tr>
-          </tbody>
-        </table>
 
       </DashboardSection>
     </>

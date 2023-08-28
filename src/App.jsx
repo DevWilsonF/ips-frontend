@@ -7,7 +7,7 @@ import NotFoundPage from './pages/NotFoundPage'
 import Navbar from './components/Navbar'
 import { useState } from 'react'
 import ProtectedRoute from './components/ProtectedRoute'
-import { handleLogin } from './api/AuthAPI'
+import { handleLogin } from './api/Auth'
 import PatientsPage from './pages/dashboard/PatientsPage'
 import AppointmentsPage from './pages/dashboard/AppointmentsPage'
 import ConsultationsPage from './pages/dashboard/ConsultationsPage'
@@ -44,21 +44,21 @@ function App() {
               <Route path='home' />
 
               <Route path='patients' element={<PatientsPage />} />
-              <Route path='patient/:id' element={<PatientPage/>} />
+              <Route path='patients/:id' element={<PatientPage/>} />
 
               <Route path='appointments' element={<AppointmentsPage />} />
 
               <Route path='consultations' element={<ConsultationsPage />} />
-              <Route path='consultation/:id' element={<PatientPage/>} />
+              <Route path='consultations/:id' element={<PatientPage/>} />
 
               <Route path='exams' element={<ExamsPage />} />
-              <Route path='exam/:id' element={<PatientPage/>} />
+              <Route path='exams/:id' element={<PatientPage/>} />
 
               <Route path='medical-histories' element={<MedicalHistoriesPage/> } />
-              <Route path='medical-history/:id' element={<PatientPage/>} />
+              <Route path='medical-histories/:id' element={<PatientPage/>} />
 
               <Route path='employees' element={<EmployeesPage/>}/>
-              <Route path='employee/:id' element={<PatientPage/>} />
+              <Route path='employees/:id' element={<PatientPage/>} />
 
               <Route path='employee-types' element={<EmployeeTypesPage/>}/>
               <Route path='profile' />
