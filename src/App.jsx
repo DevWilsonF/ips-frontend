@@ -34,24 +34,31 @@ function App() {
             <Route path='/dashboard/*' element={<DashboardPage />} >
               <Route path='home' />
 
-              <Route path='patients' element={<PatientsPage />} />
-              <Route path='patients/:id' element={<PatientPage/>} />
+
+              <Route path='patients' element={<PatientsPage />} ></Route>
+              <Route path='patients/:id/*' element={<PatientPage />} >
+                <Route path='info' element={<PatientInfoPage />}></Route>
+                <Route path='appointments' element={<PatientAppointmentsPage />}></Route>
+
+              </Route>
+
+
 
               <Route path='appointments' element={<AppointmentsPage />} />
 
               <Route path='consultations' element={<ConsultationsPage />} />
-              <Route path='consultations/:id' element={<PatientPage/>} />
+              <Route path='consultations/:id' element={<PatientPage />} />
 
               <Route path='exams' element={<ExamsPage />} />
-              <Route path='exams/:id' element={<PatientPage/>} />
+              <Route path='exams/:id' element={<PatientPage />} />
 
-              <Route path='medical-histories' element={<MedicalHistoriesPage/> } />
-              <Route path='medical-histories/:id' element={<PatientPage/>} />
+              <Route path='medical-histories' element={<MedicalHistoriesPage />} />
+              <Route path='medical-histories/:id' element={<PatientPage />} />
 
-              <Route path='employees' element={<EmployeesPage/>}/>
-              <Route path='employees/:id' element={<PatientPage/>} />
+              <Route path='employees' element={<EmployeesPage />} />
+              <Route path='employees/:id' element={<PatientPage />} />
 
-              <Route path='employee-types' element={<EmployeeTypesPage/>}/>
+              <Route path='employee-types' element={<EmployeeTypesPage />} />
               <Route path='profile' />
             </Route>
 

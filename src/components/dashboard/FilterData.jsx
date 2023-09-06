@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-function FilterData({ filters, onFilter }) {
+function FilterData({ filterParameters, onFilter }) {
   const [filterInput, setFilterInput] = useState('')
-  const [filterValue, setFilterValue] = useState(filters[0].value)
+  const [filterValue, setFilterValue] = useState(filterParameters[0].value)
   const [filterText, setFilterText] = useState('Filtrar')
   const [filterType, setFilterType] = useState('text')
 
@@ -11,7 +11,7 @@ function FilterData({ filters, onFilter }) {
   }, [filterInput]);
 
   const handleFilter = (e) => {
-    filterText === 'Filtrar' ? setFilterProps(filters[0].text,filters[0].type, filters[0].value) : ''
+    filterText === 'Filtrar' ? setFilterProps(filterParameters[0].text,filterParameters[0].type, filterParameters[0].value) : ''
     setFilterInput(e.target.value)
     
 
@@ -36,7 +36,7 @@ function FilterData({ filters, onFilter }) {
         <div className="dropdown pe-0 col-2">
           <button className='btn w-100 btn-primary dropdown-toggle' type="button" data-bs-toggle="dropdown" aria-expanded="false">{filterText}</button>
           <ul className="dropdown-menu">
-            {filters.map((value, index) => {
+            {filterParameters.map((value, index) => {
               return <li key={index}><a onClick={() => handleFilterValue(value)} className="dropdown-item" href="#">{value.text}</a></li>
             })}
 

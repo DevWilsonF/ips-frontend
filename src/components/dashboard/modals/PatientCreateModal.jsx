@@ -1,132 +1,82 @@
-import React, { useState } from 'react'
-import { Button, Form, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
-import {Accordion} from 'react-bootstrap/'
+import { useForm } from 'react-hook-form';
+import { Button, Label, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
+import { documentTypes,genderTypes,maritalStatusTypes,nationalities,occupations } from "../../../utils/DataTypes";
+
 function PatientCreateModal({ modal, toggle, onClick }) {
 
-  const nationalities = [
-    "Colombiano/a",
-    "Estadounidense",
-    "Canadiense",
-    "Mexicano/a",
-    "Argentino/a",
-    "Chileno/a",
-    "Español/a",
-    "Brasileño/a",
-    "Francés/a",
-    "Alemán/a",
-    "Italiano/a",
-    "Chino/a",
-    "Japonés/a",
-    "Ruso/a",
-    "Indio/a",
-    "Australiano/a",
-    "Sudafricano/a",
-    "No especificado"
-  ];
-  const documentTypes = [
-    "Cédula de Ciudadanía",
-    "DNI",
-    "Pasaporte",
-    "Cédula de Identidad",
-    "Licencia de Conducir",
-    "Carné de Extranjería",
-    "Tarjeta de Residencia",
-    "Documento de Identificación Fiscal",
-    "Registro Nacional de Identificación y Estado Civil (RENIEC)",
-    "Registro Federal de Contribuyentes (RFC)",
-    "Número de Seguridad Social",
-    "Otros"
-  ];
-  
-  const maritalStatusTypes = ["Soltero/a",
-    "Casado/a",
-    "Divorciado/a",
-    "Viudo/a",
-    "Separado/a",
-    "Conviviente",
-    "Comprometido/a",
-    "En una relación",
-    "Pareja de hecho",
-    "No especificado"]
-  const genderTypes = ['Masculino','Femenino','Otro']
+  const { register, reset, handleSubmit, formState: { errors } } = useForm()
 
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [gender, setGender] = useState(genderTypes[0])
-  const [maritalStatus, setMaritalStatus] = useState(maritalStatusTypes[0])
-  const [nationality, setNationality] = useState(nationalities[0])
-  const [documentType, setDocumentType] = useState(documentTypes[0])
-  const [documentNumber, setDocumentNumber] = useState('')
-  const [birthDate, setBirthDate] = useState('')
-  const [email, setEmail] = useState('')
-  const [insuranceType, setInsuranceType] = useState('')
-  const [occupation, setOccupation] = useState('')
-
-  const handleSubmit = () => {
-    if (firstName === '' || lastName === '' || phone === '' || gender === '' || maritalStatus === '' || nationality === '' || documentType === ''|| documentNumber === '' || birthDate === '' || email === '' || insuranceType === '' || occupation === '') {
-      alert('incompleto'+firstName+lastName+phone+gender+maritalStatus+nationality+documentType+birthDate+email+insuranceType+occupation)
-      return
-    }
-    onClick({
-      firstName: firstName,
-      lastName: lastName,
-      phone: phone,
-      gender: gender,
-      maritalStatus: maritalStatus,
-      nationality: nationality,
-      documentType: documentType,
-      documentNumber: documentNumber,
-      birthDate: birthDate,
-      email: email,
-      insuranceType: insuranceType,
-      occupation: occupation
-    })
+  const saveSubmit = (data) => {
+    onClick(data)
 
   }
-  
+  const handleToggle = () => {
+    reset()
+    toggle()
 
+
+  }
 
   return (
 
-    <Modal isOpen={modal} toggle={toggle} >
-      <ModalHeader toggle={toggle}>Agregar Paciente</ModalHeader>
-      <ModalBody>
-        
-        <Label>Nombre</Label>
-        <Input value={firstName} type='text' onChange={(e) => { setFirstName(e.target.value) }} />
-        <Label>Apellido</Label>
-        <Input value={lastName} type='text' onChange={(e) => { setLastName(e.target.value) }} />
-        <Label>Celular</Label>
-        <Input value={phone} type='number' onChange={(e) => { setPhone(e.target.value) }} />
-        <Label>Genero</Label>
-        <Input value={gender} type='select' onChange={(e) => { setGender(e.target.value) }} >{genderTypes.map((data,index)=><option key={index}>{data}</option>)}</Input>
-        <Label>Estado Civil</Label>
-        <Input value={maritalStatus} type='select' onChange={(e) => { setMaritalStatus(e.target.value) }} >{maritalStatusTypes.map((data, index) => <option key={index}>{data}</option>)}</Input>
-        <Label>Nacionalidad</Label>
-        <Input value={nationality} type='select' onChange={(e) => { setNationality(e.target.value) }} >{nationalities.map((data, index) => <option key={index}>{data}</option>)}</Input>
-        <Label>Tipo de documento</Label>
-        <Input value={documentType} type='select' onChange={(e) => { setDocumentType(e.target.value) }} >{documentTypes.map((data,index)=><option key={index}>{data}</option>)}</Input>
-        <Label>Numero de documento</Label>
-        <Input value={documentNumber} onChange={(e) => { setDocumentNumber(e.target.value) }} />
-        <Label>Fecha de nacimiento</Label>
-        <Input value={birthDate} type='date' onChange={(e) => { setBirthDate(e.target.value) }} />
-        <Label>Email</Label>
-        <Input value={email} type='email' onChange={(e) => { setEmail(e.target.value) }} />
-        <Label>Tipo de seguro</Label>
-        <Input value={insuranceType} onChange={(e) => { setInsuranceType(e.target.value) }} />
-        <Label>Ocupacion</Label>
-        <Input value={occupation} onChange={(e) => { setOccupation(e.target.value) }} />
+    <Modal isOpen={modal} toggle={handleToggle} >
+      <ModalHeader toggle={handleToggle}>Agregar Paciente</ModalHeader>
+      <form onSubmit={handleSubmit(saveSubmit)}>
 
-      </ModalBody>
-      <ModalFooter>
-        <Button onClick={handleSubmit} color="primary" >
-          Agregar
-        </Button>
-        <Button onClick={toggle} color="secondary">
-          Cancelar
-        </Button>
-      </ModalFooter>
+        <ModalBody>
+        
+          <Label>Nombre</Label>
+          <input {...register('firstName', { required:true , minLength: { value: 3, message: 'El nombre debe tener minimo 3 letras' } })} type="text" className={`form-control ${errors.firstName && 'is-invalid'}`} />
+          {errors.firstName && <span className='invalid-feedback'>{errors.firstName.message}</span>}
+
+          <Label>Apellido</Label>
+          <input {...register('lastName', { required: true, minLength: { value: 3, message: 'El apellido debe tener minimo 3 letras' } })} type="text" className={`form-control ${errors.lastName && 'is-invalid'}`} />
+          {errors.lastName && <span className='invalid-feedback'>{errors.lastName.message}</span>}
+
+          <Label>Telefono</Label>
+          <input {...register('phone', { required: true, minLength: { value: 7, message: 'El Telefono debe tener minimo 7 digitos' } })} type="number" className={`form-control ${errors.phone && 'is-invalid'}`} />
+          {errors.phone && <span className='invalid-feedback'>{errors.phone.message}</span>}
+
+          <Label>Genero</Label>
+          <select {...register('gender', { required: true })} className={`form-control ${errors.gender && 'is-invalid'}`} >{genderTypes.map((value, index) => <option key={index}>{value}</option>)}</select>
+
+          <Label>Estado Civil</Label>
+          <select {...register('maritalStatus', { required: true })} className={`form-control ${errors.maritalStatus && 'is-invalid'}`} >{maritalStatusTypes.map((value, index) => <option key={index}>{value}</option>)}</select>
+
+          <Label>Nacionalidad</Label>
+          <select {...register('nationality', { required: true })} className={`form-control ${errors.nationality && 'is-invalid'}`} >{nationalities.map((value, index) => <option key={index}>{value}</option>)}</select>
+
+          <Label>Tipo de documento</Label>
+          <select {...register('documentType', { required: true })} className={`form-control ${errors.documentType && 'is-invalid'}`} >{documentTypes.map((value, index) => <option key={index}>{value}</option>)}</select>
+
+          <Label>Numero de documento</Label>
+          <input {...register('documentNumber', { required: true, minLength: { value: 8, message: 'El DNI debe tener minimo 8 digitos' } })} type="number" className={`form-control ${errors.documentNumber && 'is-invalid'}`} />
+          {errors.documentNumber && <span className='invalid-feedback'>{errors.documentNumber.message}</span>}
+
+          <Label>Fecha de nacimiento</Label>
+          <input {...register('birthDate', { required: true })} type="date" className={`form-control ${errors.birthDate && 'is-invalid'}`} />
+
+          <Label>Email</Label>
+          <input {...register('email', { required: true, pattern: { value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/, message: 'Email no valido' } })} type="email" className={`form-control ${errors.email && 'is-invalid'}`} />
+          {errors.email && <span className='invalid-feedback'>{errors.email.message}</span>}
+          
+          <Label>Tipo de seguro</Label>
+          <input {...register('insuranceType', { required: true, minLength: { value: 3, message: 'El tipo de seguro debe tener minimo 3 letras' } })} type="text" className={`form-control ${errors.insuranceType && 'is-invalid'}`} />
+          {errors.insuranceType && <span className='invalid-feedback'>{errors.insuranceType.message}</span>}
+
+          <Label>Ocupacion</Label>
+          <select {...register('occupation', { required: true })} className={`form-control ${errors.occupation && 'is-invalid'}`} >{occupations.map((value,index) => <option key={index}>{value}</option>)}</select>
+
+        </ModalBody>
+        <ModalFooter>
+          <Button type='submit' color="primary" >
+            Agregar
+          </Button>
+          <Button onClick={handleToggle} color="secondary">
+            Cancelar
+          </Button>
+        </ModalFooter>
+      </form>
     </Modal>
 
   )
