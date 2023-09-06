@@ -1,21 +1,14 @@
 import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate, Link } from 'react-router-dom'
 import './App.css'
-import HomePage from './pages/HomePage'
-import LoginPage from './pages/LoginPage'
+import {HomePage, LoginPage, NotFoundPage} from "./pages"
+import {PatientPage,PatientsPage,ConsultationsPage,AppointmentsPage,ExamsPage,MedicalHistoriesPage,EmployeesPage,EmployeeTypesPage} from "./pages/dashboard"
+
 import DashboardPage from './pages/dashboard/DashboardPage'
-import NotFoundPage from './pages/NotFoundPage'
 import Navbar from './components/Navbar'
 import { useState } from 'react'
 import ProtectedRoute from './components/ProtectedRoute'
 import { handleLogin } from './api/Auth'
-import PatientsPage from './pages/dashboard/PatientsPage'
-import AppointmentsPage from './pages/dashboard/AppointmentsPage'
-import ConsultationsPage from './pages/dashboard/ConsultationsPage'
-import ExamsPage from './pages/dashboard/ExamsPage'
-import MedicalHistoriesPage from './pages/dashboard/MedicalHistoriesPage'
-import EmployeesPage from './pages/dashboard/EmployeesPage'
-import EmployeeTypesPage from './pages/dashboard/EmployeeTypesPage'
-import PatientPage from './pages/dashboard/PatientPage'
+
 
 function App() {
   const [user, setUser] = useState(null)
@@ -32,8 +25,6 @@ function App() {
 
       <Router>
         <Navbar isLogued={true} />
-        {/* <button onClick={user ? logout : login} style={{ marginTop: '70px' }}>{user ? 'Logout' : 'Login'}</button>
-        <Link to={'/dashboard/home'}><button>dashboard</button></Link> */}
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LoginPage isLogued={false} />} />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Form, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap'
-
+import {Accordion} from 'react-bootstrap/'
 function PatientCreateModal({ modal, toggle, onClick }) {
 
   const nationalities = [
@@ -92,7 +92,7 @@ function PatientCreateModal({ modal, toggle, onClick }) {
     <Modal isOpen={modal} toggle={toggle} >
       <ModalHeader toggle={toggle}>Agregar Paciente</ModalHeader>
       <ModalBody>
-
+        
         <Label>Nombre</Label>
         <Input value={firstName} type='text' onChange={(e) => { setFirstName(e.target.value) }} />
         <Label>Apellido</Label>

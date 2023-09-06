@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import DashboardSection from '../../components/dashboard/DashboardSection'
 import FilterData from '../../components/dashboard/FilterData'
 import DataTable from '../../components/dashboard/DataTable'
-import { getPatients, addPatient } from "../../api/Patients";
+import { getPatients, addPatient ,getPatient} from "../../api/Patients";
 import Loading from '../../components/Loading';
 import { Button, Form, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import PatientCreateModal from '../../components/dashboard/modals/PatientCreateModal';
@@ -15,7 +15,6 @@ function PatientsPage() {
   const [loading, setloading] = useState(true)
   const [filterData, setFilterData] = useState([])
   const [filtering, setFiltering] = useState(false)
-
   const toggle = () => setModal(!modal);
   const filter = ({ text, filterValue }) => {
     if (text == '') {
@@ -29,7 +28,7 @@ function PatientsPage() {
   }
   const loadData = async () => {
     setloading(true)
-
+    
     let data = await getPatients()
     let newData = data.map(({ PatientID, firstName, lastName, registrationDate, documentNumber, phone, email }) => ({ PatientID, firstName, lastName, registrationDate, documentNumber, phone, email }))
     setPatientsData(newData)
