@@ -89,8 +89,6 @@ function PatientPage() {
         <DashboardSection title={`${data.firstName} ${data.lastName}`}>
           <DashboardTabsSection tabs={['Informacion', 'Historia Medica', 'Consultas', 'Citas Medicas']} content={[renderInfo(), <h1>2</h1>]} />
 
-
-
         </DashboardSection>
 
       </Loading>

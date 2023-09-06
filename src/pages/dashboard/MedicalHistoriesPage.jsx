@@ -22,7 +22,7 @@ function MedicalHistoriesPage() {
   useEffect(() => {
     const fetchData = async () => {
       let data = await getMedicalHistories()
-      let newData = data.map(({ historyID, patientID }) => ({ historyID, patientID }))
+      let newData = data.map(({ PatientID, firstName }) => ({ PatientID, firstName }))
       setMedicalHistoryData(newData)
       setloading(false)
 
@@ -40,7 +40,7 @@ function MedicalHistoriesPage() {
         <FilterData onFilter={filter} filters={[{ text: 'ID', type: 'number', value: 'historyID' }, { text: 'Paciente', type: 'text', value: 'patientID' }]} />
 
         <Loading loading={loading}>
-          <DataTable titles={['ID', 'Paciente',]} filtering={filtering} filterData={filterData} data={medicalHistoryData} actions={(id) => { return <button onClick={() => alert(id)} className='btn btn-primary'>Ver</button> }} />
+          <DataTable titles={['ID', 'Paciente', ]} filtering={filtering} filterData={filterData} data={medicalHistoryData} actions={(id) => { return <button onClick={() => alert(id)} className='btn btn-primary'>Ver</button> }} />
 
         </Loading>
 

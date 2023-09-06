@@ -1,0 +1,8 @@
+export{ default as PatientPage}  from "./PatientPage"
+export{ default as PatientsPage}  from "./PatientsPage"
+export{ default as ConsultationsPage}  from "./ConsultationsPage"
+export{ default as AppointmentsPage}  from "./AppointmentsPage"
+export{ default as ExamsPage}  from "./ExamsPage"
+export{ default as MedicalHistoriesPage}  from "./MedicalHistoriesPage"
+export{ default as EmployeesPage}  from "./EmployeesPage"
+export{ default as EmployeeTypesPage}  from "./EmployeeTypesPage"
