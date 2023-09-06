@@ -1,39 +1,15 @@
-import axios from "axios"
+import {getData,postData} from "./RestAxios";
 
-export const addPatient = async (data) => {
-  try {
-    const response = await axios.post(
-      "http://127.0.0.1:8000/patients/",
-      data
-    )
-    console.log(response.data)
-    return response.data
-  } catch (error) {
-    console.error("Error al agregar paciente:", error)
-    return null
-  }
-
-  
+export const getPatients = async()=>{
+  const endpoint = 'patients/';
+  return await getData(endpoint);
 }
-
-export const getPatients = async () => {
-  try {
-    const response = await axios.get(
-      "http://127.0.0.1:8000/patients/"
-    )
-
-    return response.data
-  } catch (error) {console.error("Error al obtener pacientes:", error)
-  return null}
+export const getPatient = async(id)=>{
+  const endpoint = `patientsDetail/${id}`;
+  return await getData(endpoint);
 }
-export const getPatient = async (id) => {
-    try {
-      const response = await axios.get(
-        `http://127.0.0.1:8000/patientsDetail/${id}`
-      )
-  
-      return response.data
-    } catch (error) {console.error("Error al obtener pacientes:", error)
-    return null}
-  }
+export const addPatient = async(data)=>{
+  const endpoint = 'patients/'
+  return await postData(endpoint,data)
+}
   

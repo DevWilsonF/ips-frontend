@@ -24,7 +24,7 @@ function MedicalHistoriesPage() {
   useEffect(() => {
     const fetchData = async () => {
       let data = await getMedicalHistories()
-      let newData = data.map(({ historyID, patientID }) => ({ historyID, patientID }))
+      let newData = data.map(({ PatientID, firstName }) => ({ PatientID, firstName }))
       setMedicalHistoryData(newData)
       setloading(false)
 
