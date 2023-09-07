@@ -56,12 +56,14 @@ function DefaultBasePage({ title, addBtnTitle, filterParameters, tableTitles, or
       <FormModal toggle={toggle} modal={modalStatus} onClick={postData} />
 
       <DashboardSection title={title} header={
-        addBtnTitle!=null && <button onClick={toggle} className='btn btn-success'>{addBtnTitle}</button>}>
-        
-        <FilterData onFilter={filter} filterParameters={filterParameters} />
+        addBtnTitle != null && <button onClick={toggle} className='btn btn-success'>{addBtnTitle}</button>}>
+
 
 
         <Loading loading={loading}>
+          {tableData.length == 0 ? '' : <FilterData onFilter={filter} filterParameters={filterParameters} />
+          }
+
           <DataTable titles={tableTitles} data={tableData} actions={(id) => actionsTableButton(id)} />
 
         </Loading>
