@@ -4,6 +4,8 @@ import FilterData from '../../components/dashboard/FilterData'
 import DataTable from '../../components/dashboard/DataTable'
 import { getMedicalHistories } from '../../api/MedicalHistories'
 import Loading from '../../components/Loading'
+import DefaultBasePage from './DefaultBasePage'
+import PatientCreateModal from '../../components/dashboard/modals/PatientCreateModal'
 
 function MedicalHistoriesPage() {
   const [medicalHistoryData, setMedicalHistoryData] = useState([])
@@ -22,7 +24,7 @@ function MedicalHistoriesPage() {
   useEffect(() => {
     const fetchData = async () => {
       let data = await getMedicalHistories()
-      let newData = data.map(({ historyID, patientID }) => ({ historyID, patientID }))
+      let newData = data.map(({ PatientID, firstName }) => ({ PatientID, firstName }))
       setMedicalHistoryData(newData)
       setloading(false)
 
@@ -36,16 +38,8 @@ function MedicalHistoriesPage() {
   }, [])
   return (
     <>
-      <DashboardSection title={'Historias Medicas'}>
-        <FilterData onFilter={filter} filters={[{ text: 'ID', type: 'number', value: 'historyID' }, { text: 'Paciente', type: 'text', value: 'patientID' }]} />
-
-        <Loading loading={loading}>
-          <DataTable titles={['ID', 'Paciente',]} filtering={filtering} filterData={filterData} data={medicalHistoryData} actions={(id) => { return <button onClick={() => alert(id)} className='btn btn-primary'>Ver</button> }} />
-
-        </Loading>
-
-
-      </DashboardSection>
+      
+      <DefaultBasePage title={'Historias Medicas'} filterParameters={[{ text: 'ID', type: 'number', value: 'historyID' }, { text: 'Paciente', type: 'text', value: 'patientID' }]} tableTitles={['ID', 'Paciente']} orderDataTable={["historyID", "patientID" ]} actionsTableButton={(id)=><button onClick={() => alert(id)} className='btn btn-primary'>Ver</button>} fetchDataFunction={getMedicalHistories} postDataFunction={()=>{}} formModal={PatientCreateModal}/>
     </>
   )
 }

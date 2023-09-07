@@ -1,25 +1,8 @@
 import React from 'react'
 
-function DataTable({ titles, data, filtering, filterData, actions = null }) {
+function DataTable({ titles, data, actions = null }) {
   console.log(titles)
-  const renderFilterData = () => {
-    if (filterData.length == 0) {
-      return
-    }
 
-    return filterData.map((obj, index) => {
-
-
-      return <tr key={index}>
-
-
-        {Object.values(obj).map((value, indexObj) => { return <td key={indexObj}>{Object.values(obj)[indexObj].toString()}</td> })}
-        {actions !== null ? <td>{actions(Object.values(obj)[0])}</td> : ''}
-
-      </tr>
-    })
-
-  }
   const renderData = () => {
     return data.map((obj, index) => {
 
@@ -51,7 +34,7 @@ function DataTable({ titles, data, filtering, filterData, actions = null }) {
       </thead>
 
       <tbody>
-        {filtering ? renderFilterData() : renderData()}
+        {renderData()}
 
       </tbody>
     </table></div>
