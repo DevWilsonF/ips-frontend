@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate, Link } from 'react-router-dom'
 import './App.css'
 import {HomePage, LoginPage, NotFoundPage} from "./pages"
-import {PatientPage,PatientsPage,ConsultationsPage,AppointmentsPage,ExamsPage,MedicalHistoriesPage,EmployeesPage,EmployeeTypesPage} from "./pages/dashboard"
+import {PatientPage,PatientsPage, PatientInfoPage, PatientAppointmentsPage,ConsultationsPage,AppointmentsPage,ExamsPage,MedicalHistoriesPage,EmployeesPage,EmployeeTypesPage} from "./pages/dashboard"
 
 import DashboardPage from './pages/dashboard/DashboardPage'
 import Navbar from './components/Navbar'
