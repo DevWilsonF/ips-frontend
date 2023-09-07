@@ -26,7 +26,7 @@ function EmployeesPage() {
     </DashboardSection>
     
     <DashboardSection title={'Empleados'} header={<button className='btn btn-success'>Agregar Empleado</button>}>
-      <FilterData onFilter={filter} filterParameters={[{text:'ID',type:'number'},{text:'Nombre',type:'text'}]}/>
+      <FilterData onFilter={filter} filters={[{text:'ID',type:'number'},{text:'Nombre',type:'text'}]}/>
 
     </DashboardSection>
     </>

@@ -1,11 +1,10 @@
-import {getData,postData} from "./RestAxios";
-
+import axios from "axios";
 
 export const getMedicalHistories= async ()=>{
-  const endpoint = 'patients/';
-  return await getData(endpoint);
-}
-export const getMedicalHistory = async(id)=>{
-  const endpoint = `medicalHistoryDetail/${id}`;
-  return await getData(endpoint);
+    const response = await axios.get('https://prevenirbackend.up.railway.app/medicalHistoryList/')
+    const jsonData =JSON.stringify(response.data)
+    const data = JSON.parse(jsonData)
+    return data
+    
+
 }
