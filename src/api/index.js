@@ -1,2 +1,2 @@
-export{default as getData}from "./RestAxios";
-export{default as postData}from "./RestAxios";
+export{default as getPatients}from "./Patients";
+export{default as getMedicalHistory}from "./MedicalHistories";

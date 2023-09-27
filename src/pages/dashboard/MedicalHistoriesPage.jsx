@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import DashboardSection from '../../components/dashboard/DashboardSection'
 import FilterData from '../../components/dashboard/FilterData'
 import DataTable from '../../components/dashboard/DataTable'
-import { getMedicalHistories } from '../../api/MedicalHistories'
+import { getMedicalHistory } from '../../api/MedicalHistories'
 import Loading from '../../components/Loading'
 import DefaultBasePage from './DefaultBasePage'
 import PatientCreateModal from '../../components/dashboard/modals/PatientCreateModal'
@@ -39,7 +39,7 @@ function MedicalHistoriesPage() {
   return (
     <>
       
-      <DefaultBasePage title={'Historias Medicas'} filterParameters={[{ text: 'ID', type: 'number', value: 'historyID' }, { text: 'Paciente', type: 'text', value: 'patientID' }]} tableTitles={['ID', 'Paciente']} orderDataTable={["historyID", "patientID" ]} actionsTableButton={(id)=><button onClick={() => alert(id)} className='btn btn-primary'>Ver</button>} fetchDataFunction={getMedicalHistories} postDataFunction={()=>{}} formModal={PatientCreateModal}/>
+      <DefaultBasePage title={'Historias Medicas'} filterParameters={[{ text: 'ID', type: 'number', value: 'historyID' }, { text: 'Paciente', type: 'text', value: 'patientID' }]} tableTitles={['ID', 'Paciente']} orderDataTable={["historyID", "patientID" ]} actionsTableButton={(id)=><button onClick={() => alert(id)} className='btn btn-primary'>Ver</button>} fetchDataFunction={getMedicalHistory} postDataFunction={()=>{}} formModal={PatientCreateModal}/>
     </>
   )
 }

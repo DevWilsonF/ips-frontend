@@ -1,11 +1,11 @@
-import React from 'react'
+import React ,{useState}from 'react'
 import { Route, useOutlet, useOutletContext } from 'react-router-dom'
-import { Input, Label } from 'reactstrap'
+import { Input, Label ,Button} from 'reactstrap'
 
 
 function PatientInfoPage() {
     const [data] = useOutletContext()
-
+    const [edit, setEdit] = useState(false)
     return (
         <>
 
@@ -43,9 +43,9 @@ function PatientInfoPage() {
                     <Input value={data.firstName} disabled></Input>
 
                     <Label >Fecha registrado</Label>
-                    <Input value={data.registrationDate} disabled></Input>
+                    <Input type='date' value={data.registrationDate} disabled></Input>
 
-                    <Label >Telefono</Label>
+                    <Label >Teléfono</Label>
                     <Input value={data.phone} disabled></Input>
                     <Label >Email</Label>
                     <Input value={data.email} disabled></Input>
@@ -58,7 +58,7 @@ function PatientInfoPage() {
                     <Input value={data.insuranceType} disabled></Input>
 
                 </div>
-
+                <Button onClick={() => setEdit(!edit)} color={edit ? 'warning' : 'primary'} className='ms-auto'>{edit ? 'Guardar' : 'Editar'}</Button>
 
             </div >
 

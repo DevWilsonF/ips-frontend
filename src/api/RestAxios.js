@@ -11,10 +11,19 @@ export const getData= async (endpoint)=>{
     throw error;
   }
 }
-export const postData = async (endpoint)=>{
+export const postData = async (endpoint,data)=>{
   const URL = `${baseUrl}${endpoint}`;
   try {
     const response = await axios.post(URL, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+export const patchData = async(endpoint,data)=>{
+  const URL = `${baseUrl}${endpoint}`;
+  try {
+    const response = await axios.patch(URL, data);
     return response.data;
   } catch (error) {
     throw error;

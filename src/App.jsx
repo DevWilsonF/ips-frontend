@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate, Link } from 'react-router-dom'
 import './App.css'
 import {HomePage, LoginPage, NotFoundPage} from "./pages"
-import {PatientPage,PatientsPage, PatientInfoPage, PatientAppointmentsPage,ConsultationsPage,AppointmentsPage,ExamsPage,MedicalHistoriesPage,EmployeesPage,EmployeeTypesPage} from "./pages/dashboard"
+import {PatientPage,PatientsPage, PatientInfoPage, PatientAppointmentsPage,ConsultationsPage,AppointmentsPage,ExamsPage,MedicalHistoriesPage,MedicalHistoryDisplay,EmployeesPage,EmployeeTypesPage} from "./pages/dashboard"
 
 import DashboardPage from './pages/dashboard/DashboardPage'
 import Navbar from './components/Navbar'
 import { useState } from 'react'
 import ProtectedRoute from './components/ProtectedRoute'
 import { handleLogin } from './api/Auth'
+import medicalHistoryDisplay from './pages/dashboard/MedicalHistoryDisplay'
 
 
 function App() {
@@ -38,8 +39,8 @@ function App() {
               <Route path='patients' element={<PatientsPage />} ></Route>
               <Route path='patients/:id/*' element={<PatientPage />} >
                 <Route path='info' element={<PatientInfoPage />}></Route>
+                <Route path='medical-history' element={<MedicalHistoryDisplay />}></Route>
                 <Route path='appointments' element={<PatientAppointmentsPage />}></Route>
-
               </Route>
 
 

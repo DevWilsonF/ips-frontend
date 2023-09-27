@@ -1,7 +1,6 @@
 import React from 'react'
 
 function DataTable({ titles, data, actions = null }) {
-  console.log(titles)
 
   const renderData = () => {
     return data.map((obj, index) => {
