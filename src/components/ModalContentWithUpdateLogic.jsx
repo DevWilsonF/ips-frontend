@@ -1,81 +1,98 @@
 import React,{useState} from "react";
-import {ListGroup,CloseButton,Stack,Form,Button,Ratio,InputGroup} from 'react-bootstrap';
+import {ListGroup,CloseButton,Stack,Form,Button,Spinner,InputGroup} from 'react-bootstrap';
 import { patchMedicalHistory } from "../api/MedicalHistories";
-import { GoCheck } from "react-icons/go";
 import { ImCheckmark } from "react-icons/im";
 
 
-const ShowOptionCardContent =({data,option,dataKey,id,updateData})=>{
-  
-  
-  const cardBody = option != "Editar" && Array.isArray(data)? (data)=>{
-    const [items,setItems] = useState(data)
-    const [inputValue,setInputValue]= useState("");
-    const handleInputChange =(e)=>{
-      setInputValue(e.target.value)
+const UpdateCardBodyContent = ({ data, keyData, id, fetchData, exitOption }) => {
+  const initialItems = data.split(",");
+  const [items2, setItems] = useState(initialItems);
+  const [inputValue, setInputValue] = useState("");
+  const [loading ,setLoading]= useState(false)
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleAddItem = () => {
+    if (inputValue.trim() !== "") {
+      const newItem = inputValue.trim();
+      setItems((prevItems) => [...prevItems, newItem]);
+      setInputValue("");
     }
-    const handleAddItem = ()=>{
-      if (inputValue !== "") {
-        const newItem = inputValue.trim();
-        setItems([...items, newItem]);
-        setInputValue("");
-        UpdateContentData([...items, newItem],dataKey);
+  };
+
+  const handleRemoveItem = (index) => {
+    setItems((prevItems) => {
+      const updatedItems = [...prevItems];
+      updatedItems.splice(index, 1);
+      return updatedItems;
+    });
+  };
+
+  const UpdateContentData = async () => {
+    if (Array.isArray([...items2])) {
+      const dataString = [...items2].join(",");
+      const newData = { [keyData]: dataString };
+      console.log(newData);
+      try {
+        setLoading(true)
+        await patchMedicalHistory(id, newData);
+        await fetchData();
+        exitOption(keyData)
+        setLoading(false)
+      } catch (error) {
+        console.error("No se pudo cargar los datos", error);
       }
     }
-    const handleRemoveItem=(index)=>{
-      const newItems = [...items]
-      newItems.splice(index,1);
-      setItems(newItems)
-      UpdateContentData(newItems,dataKey);
-    }
-    const UpdateContentData = async (dataValue,dataKey)=>{
-      if(Array.isArray(dataValue)){
-        const dataString = dataValue.join(",");
-        const data={};
-        data[dataKey]= dataString;
-        try{
-          await Promise.all([patchMedicalHistory(id,data),updateData()]) 
-        }catch(error){
-          console.error("no se pudo cargar los datos",error)
-        }
-      }
-    }
-    return(
-      <>
+  };
+
+  return (
+    <>
       <ListGroup>
-        {items.map((item,index)=>(
+        {items2.map((item, index) => (
           <ListGroup.Item key={index}>
-          <Stack direction="horizontal" gap={2}>
-              {item}<CloseButton onClick={() => handleRemoveItem(index)} className="p-2 ms-auto" />
-          </Stack> 
-        </ListGroup.Item>
+            <Stack direction="horizontal" gap={2}>
+              {item}
+              <CloseButton
+                onClick={() => handleRemoveItem(index)}
+                className="p-2 ms-auto"
+              />
+            </Stack>
+          </ListGroup.Item>
         ))}
       </ListGroup>
-        <br />
-        <Stack direction="horizontal" gap={3}>
-          <InputGroup className="mb-3">
-            <Form.Control
-              className="me-auto"
-              placeholder="Añadir Nuevo"
-              value={inputValue}
-              onChange={handleInputChange} />
-            <Button  variant="outline-success" onClick={handleAddItem}>
-              <ImCheckmark></ImCheckmark>
-            </Button>
-          </InputGroup>
-        </Stack>
-        <Button variant="primary" >Guardar Cambios</Button>
-      </>
-    )}:(data)=>(
+      <br />
+      <Stack direction="horizontal" gap={3}>
+        <InputGroup className="mb-3">
+          <Form.Control
+            className="me-auto"
+            placeholder="Añadir Nuevo"
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+          <Button variant="outline-success" onClick={handleAddItem}>
+            <ImCheckmark />
+          </Button>
+        </InputGroup>
+      </Stack>
+      <Stack direction="horizontal" gap={2}>
+        <Button variant="primary" disabled={loading} onClick={UpdateContentData}>
+          {loading === true ? <><Spinner
+            as="span"
+            animation="grow"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+          />Loading...</>:"Guardar Cambios"}
+        </Button>
+        <Button variant="secondary" disabled={loading} onClick={()=>{exitOption(keyData)}}>
+          Cancelar
+        </Button>
+      </Stack>
       
-      <>{data.map((item,index)=>(
-        <li key={index}>{item}</li>
-      ))}</>
-    )
-  return(
-        <ListGroup>
-          {cardBody(data)}
-        </ListGroup>
-  )
-}
-export default ShowOptionCardContent;
+    </>
+  );
+};
+
+export default UpdateCardBodyContent;

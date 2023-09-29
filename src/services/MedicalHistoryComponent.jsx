@@ -2,7 +2,8 @@ import React,{useState,useEffect} from "react";
 import {getMedicalHistory} from "../api/MedicalHistories";
 import { Col, Row,Container,Card,Form,Button,Stack } from "react-bootstrap";
 import ModalComponent from "../components/ModalContainer";
-import ShowOptionCardContent from "../components/ModalContentWithUpdateLogic";
+// import ShowOptionCardContent from "../components/ModalContentWithUpdateLogic";
+import UpdateCardBodyContent from "../components/ModalContentWithUpdateLogic";
 import CardContainer from "../components/CardComponent";
 
 
@@ -11,10 +12,10 @@ const MedicalHistoryDetails = ({ id }) => {
   const orderData = { allergies: 'Alergias', surgeries: 'Cirugias', previousDiseases: 'Diagnostico Previo' };
 
   // Crear un estado para cada botón individual
-  const [buttonNames, setButtonNames] = useState({
-    allergies: 'Editar',
-    surgeries: 'Editar',
-    previousDiseases: 'Editar',
+  const [StatusButton, setStatusButton] = useState({
+    allergies: true,
+    surgeries: true,
+    previousDiseases: true,
   });
 
   const fetchData = async () => {
@@ -26,11 +27,10 @@ const MedicalHistoryDetails = ({ id }) => {
     fetchData();
   }, [id]);
 
-  // Función para cambiar el nombre del botón específico
-  const eventOnClickChangeOption = (key) => {
-    setButtonNames((prevButtonNames) => ({
-      ...prevButtonNames,
-      [key]: prevButtonNames[key] === 'Editar' ? 'Salir' : 'Editar',
+  const eventOnClickChangeStatus = (key) => {
+    setStatusButton((prevStatusButton) => ({
+      ...prevStatusButton,
+      [key]: prevStatusButton[key] === true ? false : true,
     }));
   };
 
@@ -39,18 +39,18 @@ const MedicalHistoryDetails = ({ id }) => {
       {Object.entries(orderData).map(([key, value], index) => {
         const sizeCol = key === 'previousDiseases' ? 12 : 6;
         const dataString = new String(data[key] || '');
-        const splitData = dataString.split(',');
+        const keyData = new String(key||'')
         const buttonSwitchOption=()=>{
           return(
             <Stack direction="horizontal" gap={3}>
               {value}
+              {StatusButton[key]===true?
               <Button
                 className="p-2 ms-auto"
                 variant="primary"
-                onClick={() => eventOnClickChangeOption(key)} // Pasar la clave (key) del botón
-              >
-                {buttonNames[key]} 
-              </Button>
+                onClick={() => eventOnClickChangeStatus(key)} // Pasar la clave (key) del botón
+              >Editar</Button>:<></>}
+              
             </Stack>
           )
         }
@@ -58,7 +58,9 @@ const MedicalHistoryDetails = ({ id }) => {
         return (
           <Col key={index} md={12} lg={sizeCol} className="mb-4">
             <CardContainer title={buttonSwitchOption()}>
-              <ShowOptionCardContent data={splitData} option={buttonNames[key]} dataKey={key} id={id} updateData={fetchData}></ShowOptionCardContent>
+              {StatusButton[key] === true? dataString.split(",").map((element,index)=>(<li key={index}>{element}</li>)
+              ):<UpdateCardBodyContent data={dataString} keyData={keyData} id={id} fetchData={fetchData} exitOption={eventOnClickChangeStatus}></UpdateCardBodyContent>}
+              
             </CardContainer>
           </Col>
         );
