@@ -1,7 +1,18 @@
 import react,{ useEffect, useState } from 'react'
 import { Table,Button } from 'react-bootstrap'
-const DisplayTable=({tableHeaders,tableContent})=>{
-
+const DisplayTable=({tableHeaders,tableContent,children})=>{
+    const [data,setData]=useState([])
+    const fetchData = async ()=>{
+        try{
+            const response = await tableContent
+            setData(response)
+        }catch(error){
+            console.error("No  se pudo obtener los datos para la tabla",error)
+        }
+    }
+    useEffect(() => {
+        fetchData();
+        },[])
     return (
         <Table responsive size="lg">
             <thead>
@@ -15,7 +26,7 @@ const DisplayTable=({tableHeaders,tableContent})=>{
                 </tr>
             </thead>
             <tbody>
-            {tableContent.map((element, rowIndex) => (
+            {data.map((element, rowIndex) => (
                 <tr key={rowIndex}>
                     {Object.values(tableHeaders).map((header, colIndex) => (
                     <td key={colIndex}>
@@ -23,7 +34,7 @@ const DisplayTable=({tableHeaders,tableContent})=>{
                     </td>
                     ))}
                     <td>
-                        <Button>Ver mas</Button>
+                        {children}
                     </td>
                 </tr>
                 ))}

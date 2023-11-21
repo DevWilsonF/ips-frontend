@@ -1,6 +1,9 @@
 import React from 'react'
 import '../styles/LoginPage.css'
 import { Navigate } from 'react-router-dom'
+import {Card,Button,FloatingLabel,Form, Container,Row,Col} from 'react-bootstrap';
+
+
 function LoginPage({isLogued}) {
   document.title = 'Prevenir IPS | Login'
   if(isLogued){
@@ -8,18 +11,26 @@ function LoginPage({isLogued}) {
 
   }
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ minHeight: 'calc(100vh - 70px)'}}>
-      <div className="d-flex flex-column justify-content-center shadow-lg rounded-4 p-3 login">
-        <h1>Login</h1>
-        <form action="">
-          <label className='form-label' htmlFor="name">Nombre:</label>
-          <input className='form-control' type="text" id='name' />
-          <label className='form-label' htmlFor="name">Contraseña:</label>
-          <input className='form-control mb-4' type="password" id='name' />
-          <button className='btn btn-primary'>Login</button>
-        </form>
-      </div>
-    </div>
+    <Container >
+      <Row className="justify-content-md-center mt-5">
+        <Col sm="12" md="5">
+          <Card  className="text-center" style={{boxShadow: "0 0 10px #111111"}}>
+            <Card.Img variant="top" src="logoIPS.png" />
+            <Card.Body>
+              <>
+                <FloatingLabel  controlId="floatingInput" label="Usuario" className="m-3">
+                  <Form.Control type="text" placeholder="Usuario" />
+                </FloatingLabel>
+                <FloatingLabel controlId="floatingPassword" label="Contraseña" className="m-3">
+                  <Form.Control type="password" placeholder="Contraseña" />
+                </FloatingLabel>
+              </>
+              <Button variant="primary">Login</Button>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

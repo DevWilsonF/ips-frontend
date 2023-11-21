@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 function Navbar({isLogued}) {
   return (
-    
+      
       <nav className="navbar navbar-expand-lg border-bottom border-bottom-dark shadow-sm sticky-top z-3" style={{backgroundColor:'#fff'}}>
         <div className="container-fluid">
           <NavLink className="navbar-brand" to={'/'}> <img src="/ips_logo.ico" alt="Prevenir-logo" width={30} height={24} /> </NavLink>
@@ -17,7 +17,7 @@ function Navbar({isLogued}) {
               </li>
               
               <li className="nav-item">
-                <NavLink className={`nav-link`} to={isLogued?'/dashboard/home':'/login'}>{isLogued?'Dashboard':'Login'}</NavLink>
+                <NavLink className={`nav-link`} to={isLogued?'/dashboard/patients':'/login'}>{isLogued?'Dashboard':'Login'}</NavLink>
               </li>
 
             </ul>

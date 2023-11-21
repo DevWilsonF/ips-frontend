@@ -1,8 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {getMedicalHistory} from "../api/MedicalHistories";
 import { Col, Row,Container,Card,Form,Button,Stack } from "react-bootstrap";
-import ModalComponent from "../components/ModalContainer";
-// import ShowOptionCardContent from "../components/ModalContentWithUpdateLogic";
 import UpdateCardBodyContent from "../components/ModalContentWithUpdateLogic";
 import CardContainer from "../components/CardComponent";
 

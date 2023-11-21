@@ -1,12 +1,30 @@
 import { getConsultations } from '../../api/Consultations'
 import DefaultBasePage from './DefaultBasePage'
 import PatientCreateModal from '../../components/dashboard/modals/PatientCreateModal'
-
-function ConsultationsPage() {   
+import { Container,Row ,Col,Placeholder,Card} from 'react-bootstrap'
+import CardComponent from "../../components/CardComponent" 
+import DisplayLoadData from '../../components/LoadingData'
+function ConsultationsPage({data}) {
+    data = data ?? DisplayLoadData()
     return (
-        <>
-            <DefaultBasePage title={'Consultas'} addBtnTitle={'Agregar Consulta'} tableTitles={['ID', 'Doctor', 'Paciente', 'Fecha']} orderDataTable={["consultationID", "employeeID", "patientID", "consultationDate"]} actionsTableButton={(id)=><button onClick={() => alert(id)} className='btn btn-primary'>Ver</button>} filterParameters={[{ text: 'ID', type: 'number', value: 'consultationID' }, { text: 'Doctor', type: 'text', value: 'employeeID' }, { text: 'Paciente', type: 'text', value: 'patientID' }, { text: 'Fecha', type: 'date', value: 'consultationDate' }]} fetchDataFunction={getConsultations} postDataFunction={()=>{}} formModal={PatientCreateModal} />
-        </>
+        <Container>
+                <Row >
+                    <Col className='mb-3' lg={12}><CardComponent header={false}>datos{data}</CardComponent></Col>
+                </Row>
+                <Row >
+                     <Col className='mb-3' sm={12}lg={4}><CardComponent header={false}>signos vitales{data}</CardComponent></Col>
+                     <Col className='mb-3' sm={12}lg={8}><CardComponent header={false}>Diagnostico {data}</CardComponent></Col>
+                </Row>
+                <Row >
+                    <Col className='mb-3' lg={12}><CardComponent header={false}>Tratamiento{data}</CardComponent></Col>
+                </Row>
+                <Row >
+                    <Col className='mb-3' sm={12}lg={7}><CardComponent header={false}>Notas medicas{data}</CardComponent></Col>
+                    <Col className='mb-3' sm={12}lg={5}><CardComponent header={false}>examenes{data}</CardComponent></Col>
+                     
+                </Row>
+
+        </Container>
     )
 }
 

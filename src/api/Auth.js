@@ -1,10 +1,6 @@
-import axios from "axios"
+import {postData} from "./RestAxios"
 
-export const handleLogin = async (username,password)=>{
-    const response = await axios.post('http://127.0.0.1:8000/login/',{username,password})
-    alert(response)
-
-}
-export const handleRefresh = async()=>{
-
-}
+export const postLogin = async(data)=>{
+    const endpoint = `login/`;
+    return await postData(endpoint,data)
+  }

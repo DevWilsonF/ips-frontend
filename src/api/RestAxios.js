@@ -1,7 +1,7 @@
 // RestClient.js
 import axios from "axios";
-const baseUrl = 'http://127.0.0.1:8000/'
-
+// const baseUrl = 'https://rskw7k67-8000.use2.devtunnels.ms/'
+const baseUrl = 'http://localhost:8000/'
 export const getData= async (endpoint)=>{
   const URL = `${baseUrl}${endpoint}`;
   try {

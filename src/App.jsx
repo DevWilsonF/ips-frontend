@@ -1,36 +1,26 @@
-import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate, Link } from 'react-router-dom'
-import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import {HomePage, LoginPage, NotFoundPage} from "./pages"
 import {PatientPage,PatientsPage, PatientInfoPage, PatientAppointmentsPage,ConsultationsPage,AppointmentsPage,ExamsPage,MedicalHistoriesPage,MedicalHistoryDisplay,EmployeesPage,EmployeeTypesPage} from "./pages/dashboard"
 
 import DashboardPage from './pages/dashboard/DashboardPage'
 import Navbar from './components/Navbar'
-import { useState } from 'react'
 import ProtectedRoute from './components/ProtectedRoute'
-import { handleLogin } from './api/Auth'
 import medicalHistoryDisplay from './pages/dashboard/MedicalHistoryDisplay'
-
+import {handleAuth} from "./services/HandleAuth"
 
 function App() {
-  const [user, setUser] = useState(null)
-  const login = () => {
-    setUser({ id: 1, name: 'test' })
-
-  }
-  const logout = () => {
-    setUser(null)
-  }
+  const isAuth= true
   return (
     <>
-
-
+      
       <Router>
-        <Navbar isLogued={true} />
+        
         <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/login' element={<LoginPage isLogued={false} />} />
-          <Route element={<ProtectedRoute isAllowed={true} />}>
-
+          <Route element={<ProtectedRoute isAllowed={!isAuth} />}>
+            <Route path='/login' element={<LoginPage isLogued={isAuth} />} />
+            <Route path='/' element={<HomePage />} />
+          </Route>
+          <Route element={<ProtectedRoute isAllowed={isAuth} />}>
 
             <Route path='/dashboard/*' element={<DashboardPage />} >
               <Route path='home' />
@@ -39,16 +29,16 @@ function App() {
               <Route path='patients' element={<PatientsPage />} ></Route>
               <Route path='patients/:id/*' element={<PatientPage />} >
                 <Route path='info' element={<PatientInfoPage />}></Route>
-                <Route path='medical-history' element={<MedicalHistoryDisplay />}></Route>
+                <Route path='medical-history' element={<MedicalHistoryDisplay />}>
+                </Route>
                 <Route path='appointments' element={<PatientAppointmentsPage />}></Route>
               </Route>
 
 
 
               <Route path='appointments' element={<AppointmentsPage />} />
-
+              <Route path='consultation/:id' element={<ConsultationsPage />} />
               <Route path='consultations' element={<ConsultationsPage />} />
-              <Route path='consultations/:id' element={<PatientPage />} />
 
               <Route path='exams' element={<ExamsPage />} />
               <Route path='exams/:id' element={<PatientPage />} />

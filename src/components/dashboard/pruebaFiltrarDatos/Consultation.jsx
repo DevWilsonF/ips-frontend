@@ -1,22 +1,13 @@
 import react ,{useState,useEffect} from "react";
 import DisplayTable from "./Table"
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {getConsultations} from "../../../api/Consultations"
+import { consultationsTranslate } from "../../../utils/consultationDictionary";
 const ConsultationDisplay =()=>{
     let { id } = useParams()
-    const [data, setData] = useState([])
-    const dictionary = {"Diagnostico":"diagnosis",
-                    "Fecha Consulta":"consultationDate"};
-    const fetchData = async () => {
-        let data = await getConsultations(id)
-        setData(data)
-      }
-      useEffect(() => {
-        fetchData()
-      }, [])
-
+    const headers= consultationsTranslate()
     return(
-        <DisplayTable tableHeaders={dictionary} tableContent={data}></DisplayTable>
+        <DisplayTable tableHeaders={consultationsTranslate()} tableContent={getConsultations(id)}><Link className='btn btn-primary' to={`/dashboard/consultation/${id}`}>Ver</Link></DisplayTable>
     )
 }
 export default ConsultationDisplay
