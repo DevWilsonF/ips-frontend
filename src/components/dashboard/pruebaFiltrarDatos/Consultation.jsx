@@ -5,7 +5,6 @@ import {getConsultations} from "../../../api/Consultations"
 import { consultationsTranslate } from "../../../utils/consultationDictionary";
 const ConsultationDisplay =()=>{
     let { id } = useParams()
-    const headers= consultationsTranslate()
     return(
         <DisplayTable tableHeaders={consultationsTranslate()} tableContent={getConsultations(id)}><Link className='btn btn-primary' to={`/dashboard/consultation/${id}`}>Ver</Link></DisplayTable>
     )

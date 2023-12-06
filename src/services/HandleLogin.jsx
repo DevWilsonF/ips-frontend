@@ -1,16 +1,13 @@
-import {postData} from "../api/rest_axios"
+import {postData} from "../api/RestAxios"
 
-
-export const handleLogin= async(username,password,rol)=>{
-  const endpoint= ""
-  const data = {"username":username,"password":password,"rol":rol}
+export const handleLogin= async(username,password)=>{
+  const endpoint= "login/"
+  const data = {"username":username,"password":password}
   try {
     const response = await postData(endpoint, data);
-    sessionStorage.setItem("username", response.data.username);
-    sessionStorage.setItem("token_access", response.data.access);
-    sessionStorage.setItem("token_refresh", response.data.refresh);
+    localStorage.setItem("token_access", response.access);
+    localStorage.setItem("token_refresh", response.refresh);
   } catch (error) {
     console.error("Error during login:", error);
-    throw error;
   }
 }

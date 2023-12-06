@@ -5,9 +5,7 @@ import '../../styles/DashboardPage.css'
 function DashboardPage() {
   return (
     <>
-    {/* Left navbar */}
     <LeftNavbar/>
-    {/* content */}
     <div className='content p-4'>
       <Outlet/>
     </div>

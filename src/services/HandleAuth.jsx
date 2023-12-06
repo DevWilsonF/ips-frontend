@@ -1,7 +1,11 @@
-import { refreshToken } from "./RefreshToken";
+import {React,useState,useEffect} from 'react'
+import { refreshToken } from "../api/Auth";
 
 export const handleAuth = ()=>{
-  if (sessionStorage.getItem("token_access") === null || sessionStorage.getItem("token_refresh") === null)
+  if (localStorage.getItem("token_access") === null || localStorage.getItem("token_refresh") === null){
     return false
-  return  refreshToken();
+  }else{
+    return true
+  }
 }
+

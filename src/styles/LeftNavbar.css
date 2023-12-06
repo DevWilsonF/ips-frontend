@@ -1,4 +1,4 @@
-.dashboard {
+  .dashboard {
     width: 280px;
     height: calc(100vh - 57px);
     position: fixed;  
@@ -9,6 +9,7 @@
   }
   .dashboard-link:hover{
       background-color: #434343;
+      cursor: pointer;
   }
 
   @media (max-width: 575px) {
@@ -17,4 +18,3 @@
       }
       
   }
-  
