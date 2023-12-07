@@ -24,7 +24,7 @@ function LoginPage() {
         <Col sm="12" md="4">
           <Card  className="text-center">
             <Card.Body className='p-3'>
-                <Stack gap={2} >
+                <Stack gap={2}>
                   <Card.Title>Sign In</Card.Title>
                   <FloatingLabel  controlId="floatingInput" label="Usuario" className="m-3">
                     <Form.Control  type="text" defaultValue={""} placeholder="Usuario" onChange={(e)=> setUsername(e.target.value)}/>
