@@ -3,19 +3,23 @@ import '../styles/LoginPage.css'
 import {Card,Button,FloatingLabel,Form, Stack,Row,Col} from 'react-bootstrap';
 import { handleLogin } from '../services/HandleLogin';
 import {handleAuth} from "../services/HandleAuth"
-import { useNavigate } from 'react-router-dom';
-function LoginPage() {
+import { Navigate, useNavigate } from 'react-router-dom';
+function LoginPage({isAuth}) {
   document.title = 'Prevenir IPS | Login'
-  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const login = async() =>{
     try {
+      
       await handleLogin(username,password);
-      navigate('/dashboard/patients');
+      window.location.reload(true)
     } catch (error) {
       console.error("Error en el inicio de sesión:",error)
     }
+  }
+  if(isAuth ){
+    
+    return <Navigate to={"/dashboard/patients"}/>;
   }
   
   return (

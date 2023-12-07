@@ -31,7 +31,7 @@ function App() {
         <Navbar isLogued={isAuth}/>
         <Routes>
           <Route path='/' element={<HomePage />} />
-          <Route path='/login' element={<LoginPage/>} />
+          <Route path='/login' element={<LoginPage isAuth={isAuth}/>} />
           <Route element={<ProtectedRoute isAllowed={isAuth} />}>
             <Route path='/dashboard/*' element={<DashboardPage />} >
               <Route path='patients' element={<PatientsPage />} ></Route>
